@@ -4,37 +4,6 @@ console.log(
 )
 console.log(window.location.port)
 
-// 创建并插入加载动画的函数
-function showLoading() {
-  if (document.getElementById('custom-loading-mask')) return;
-  const mask = document.createElement('div');
-  mask.id = 'custom-loading-mask';
-  mask.style.position = 'fixed';
-  mask.style.top = 0;
-  mask.style.left = 0;
-  mask.style.width = '100vw';
-  mask.style.height = '100vh';
-  mask.style.background = 'rgba(255,255,255,0.85)';
-  mask.style.zIndex = 100000;
-  mask.style.display = 'flex';
-  mask.style.alignItems = 'center';
-  mask.style.justifyContent = 'center';
-
-  // 简单的 loading 动画（CSS 动画的圆圈）
-  mask.innerHTML = `
-    <div style="display:flex;flex-direction:column;align-items:center;">
-      <div style="width:48px;height:48px;border:5px solid #bbb;border-top:5px solid #4169e1;border-radius:50%;animation:spin 1s linear infinite;"></div>
-      <div style="margin-top:16px;color:#333;font-size:18px;">正在加载...</div>
-    </div>
-    <style>
-      @keyframes spin {
-        0% { transform: rotate(0deg);}
-        100% { transform: rotate(360deg);}
-      }
-    </style>
-  `;
-  document.body.appendChild(mask);
-}
 // very important, if you don't know what it is, don't touch it
 // 非常重要，不懂代码不要动，这里可以解决80%的问题，也可以生产1000+的bug
 const hookClick = (e) => {
@@ -50,11 +19,7 @@ const hookClick = (e) => {
         e.preventDefault()
         showLoading()
         console.log('handle origin', origin)
-        // location.href = origin.href
-        // 延迟一下，确保动画渲染出来
-        setTimeout(() => {
-          location.href = origin.href
-        }, 300)
+         location.href = origin.href
     } else {
         console.log('not handle origin', origin)
     }
